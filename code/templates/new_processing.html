@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="" />
+    <meta name="description" content="">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+        integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+    <!-- Custom styles -->
+    <link rel="stylesheet" href="../static/css/style.css">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:700|Roboto" rel="stylesheet">
+
+    <!-- Ionic icons -->
+    <link href="https://unpkg.com/ionicons@4.2.0/dist/css/ionicons.min.css" rel="stylesheet">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="../static/css_images/favicon.png" />
+
+    <title>数字图像处理小作业</title>
+
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html"><img src="../static/css_images/logo.svg" id="logo" class="img-fluid" alt=""></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="icon ion-md-menu"></i>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#hero">Main</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#pricing">Docs</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- End Navbar -->
+
+    <!-- Hero -->
+    <section id="hero">
+        <div style="padding-bottom:30px;">
+            <a href="/"> << Back </a>
+        </div>
+
+        <div class="container">
+            <div class="heading-wrapper">
+
+        <div class="jumbotron">
+            <img src=" {{url_for('send_image', filename=image_name)}} " style="max-width:40%">
+        </div>
+
+        <div style="text-align:left;">
+            <h5>直方图均衡化</h5>
+                <form id="form-MT" action="{{ url_for('M_T') }}" method="POST" enctype="multipart/form-data">
+                    <button id="GRAY" class="primary-btn" type="submit" name="mode" value="GRAY">灰度图</button>
+                    <button id="RGB" class="primary-btn" type="submit" name="mode" value="RGB">RGB彩色图</button>
+                    <button id="HSI" class="primary-btn" type="submit" name="mode" value="HSI">HSI彩色图</button>
+                    <input type="text" class="hidden" name="image" value="{{ image_name }}">  
+                </form>
+
+            <h5>图像锐化(拉普拉斯变换)</h5>
+                <form id="form-MT" action="{{ url_for('M_T') }}" method="POST" enctype="multipart/form-data">        
+                	<button id="Laplacian_1" class="primary-btn" type="submit" name="mode" value="Laplacian_1">中心为-4的拉普拉斯算子</button>
+                	<button id="Laplacian_2" class="primary-btn" type="submit" name="mode" value="Laplacian_2">中心为-8的拉普拉斯算子</button>
+                	<input type="text" class="hidden" name="image" value="{{ image_name }}">  
+            	</form>
+
+            <h5>空间域滤波复原</h5>
+                <form id="form-MT" action="{{ url_for('M_T') }}" method="POST" enctype="multipart/form-data">        
+                	<button id="Arithmetic" class="primary-btn" type="submit" name="mode" value="Arithmetic">算术平均均值滤波</button>
+                	<button id="Geometric" class="primary-btn" type="submit" name="mode" value="Geometric">几何平均均值滤波</button>
+                	<button id="Adaptive" class="primary-btn" type="submit" name="mode" value="Adaptive">自适应局部噪声消除均值滤波</button>
+                	<input type="text" class="hidden" name="image" value="{{ image_name }}">  
+            	</form>
+        </div>
+        </div>
+    </section>
+    <!-- End Hero -->
+
+    <section id="pricing">
+        <div class="container">
+            <div class="heading-wrapper">
+                <h2>说明文档</h2>
+                <br>
+                <h5>直方图均衡化</h5>
+                <p>直方图均衡化，是通过灰度值变换，调整图像的灰度值分布，使得图像的像素尽可能均匀地占有全部可能的灰度值，可用于提高图像的对比度。本实验分别提供在灰度、RGB和HSI空间下的直方图均衡化算法（请根据输入图像和需求选取对应的选项）。</p>  
+                
+                <h5>图像锐化(拉普拉斯变换)</h5>
+                <p>图像锐化是通过滤波器寻找图像中的重要细节并进行增强。二阶微分算子（拉普拉斯算子）可以用于定位图像中的边缘信息，通过对边缘增强能够实现锐化效果。本实验提供中心为-4与-8两种拉普拉斯算子，分别能产生不同的锐化效果。</p>
+
+                <h5>空间域滤波复原</h5>
+                <p>空间域滤波复原，是在已知噪声的情况下，使用空间域滤波降低图像中的噪声。针对高斯噪声，本实验采用均值滤波器对图像的局部区域求平均值，对局部变化进行平滑，在模糊结果的同时减少噪声。可以根据需求，选取算术均值、自适应均值和几何均值滤波器。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <section id="footer">
+        <div class="container">
+            <div class="heading-wrapper">
+                <h3>内容</h3>
+                <p>直方图均衡化</p>
+                <p>图像锐化(拉普拉斯变换)</p>
+                <p>空间域滤波复原</p>
+            </div>
+            <div class="row topmargin-lg">
+                <div class="col-md-4">
+                    <small>© 数字图像处理 2021</small>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End Footer -->
+
+</body>
+
+</html>

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="" />
+    <meta name="description" content="">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+        integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+    <!-- Custom styles -->
+    <link rel="stylesheet" href="../static/css/style.css">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:700|Roboto" rel="stylesheet">
+
+    <!-- Ionic icons -->
+    <link href="https://unpkg.com/ionicons@4.2.0/dist/css/ionicons.min.css" rel="stylesheet">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="../static/css_images/favicon.png" />
+    
+    <title>数字图像处理小作业</title>
+
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html"><img src="../static/css_images/logo.svg" id="logo" class="img-fluid" alt=""></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="icon ion-md-menu"></i>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#hero">Main</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#pricing">Docs</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- End Navbar -->
+
+    <!-- Hero -->
+    <section id="hero">
+        <div style="padding-bottom:30px;">
+            <a href="#" onclick="javascript:history.back(-1);"> << Back </a>
+        </div>
+
+        <div class="container">
+            <div class="heading-wrapper">
+                <!-- <div>
+                    <div class="jumbotron-left" style="height:250px">
+                        <img src=" {{url_for('send_image', filename=original_name)}} " style="height:80%">
+                        <div style="padding-top:10px;"> Original </div>
+                    </div>
+
+                    <div class="jumbotron-right" style="height:250px">
+                        <img src=" {{url_for('send_image', filename=kernel_name)}} " style="height:80%">
+                        <div style="padding-top:10px;"> Random Kernel </div>
+                    </div>
+                </div> -->
+
+
+                <div class="jumbotron-left">
+                    <img src=" {{url_for('send_image', filename=raw_name)}} " style="max-width:100%">
+                    <div style="padding-top:10px;"> 原图 </div>
+                </div>
+
+                <div class="jumbotron-right">
+                    <img src=" {{url_for('send_image', filename=laplace_name)}} " style="max-width:100%">
+                    <div style="padding-top:10px;"> 拉普拉斯算子 </div>
+                </div>
+
+                <div class="jumbotron-left">
+                    <img src=" {{url_for('send_image', filename=norm_name)}} " style="max-width:100%">
+                    <div style="padding-top:10px;"> 归一化拉普拉斯算子 </div>
+                </div>
+
+                <div class="jumbotron-right">
+                    <img src=" {{url_for('send_image', filename=result_name)}} " style="max-width:100%">
+                    <div style="padding-top:10px;"> 图像锐化结果 </div>
+                </div>
+            </div>
+        </div>
+    
+    </section>
+    <!-- End Hero -->
+
+    <section id="pricing">
+        <div class="container">
+            <div class="heading-wrapper">
+                <h5>图像锐化(拉普拉斯变换)</h5>
+                <p>图像锐化是通过滤波器寻找图像中的重要细节并进行增强。二阶微分算子（拉普拉斯算子）可以用于定位图像中的边缘信息，通过对边缘增强能够实现锐化效果。本实验提供中心为-4与-8两种拉普拉斯算子，分别能产生不同的锐化效果。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <section id="footer">
+        <div class="container">
+            <div class="heading-wrapper">
+                <h3>内容</h3>
+                <p>直方图均衡化</p>
+                <p>图像锐化(拉普拉斯变换)</p>
+                <p>空间域滤波复原</p>
+            </div>
+            <div class="row topmargin-lg">
+                <div class="col-md-4">
+                    <small>© 数字图像处理 2021</small>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End Footer -->
+
+</body>
+
+</html>

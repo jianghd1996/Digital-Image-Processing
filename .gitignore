@@ -1,6 +1,6 @@
 # My dataset
 image_dataset/
-code/templates
+code\static\temp_images
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
