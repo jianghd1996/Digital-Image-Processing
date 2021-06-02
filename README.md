@@ -42,11 +42,11 @@ Results :
 
 Gray images (raw, raw histogram, equalized, equalized histogram)
 
-![Histogram_equalize_gray](result\Histogram_equalize_gray.png)
+![Histogram_equalize_gray](https://github.com/jianghd1996/Digital-Image-Processing/tree/main/result/Histogram_equalize_gray.png)
 
 Color (raw, RGB, HSI)
 
-![Histogram_equalize_color](result\Histogram_equalize_color.png)
+![Histogram_equalize_color](https://github.com/jianghd1996/Digital-Image-Processing/tree/main/result/Histogram_equalize_color.png)
 
 
 
@@ -76,9 +76,9 @@ $$
 $$
 
 
-Result (raw, laplacian, normalized laplacian, sharpen)![Laplacian_gray](result\Laplacian_gray.png)
+Result (raw, laplacian, normalized laplacian, sharpen)![Laplacian_gray](https://github.com/jianghd1996/Digital-Image-Processing/tree/main/result/Laplacian_gray.png)
 
-![Laplacian_color](result\Laplacian_color.png)
+![Laplacian_color](https://github.com/jianghd1996/Digital-Image-Processing/tree/main/result/Laplacian_color.png)
 
 
 
@@ -139,9 +139,9 @@ $$
 $$
 Result (raw, noise, arithmetic, geometric, adaptive)
 
-![Spacial_image_restore_mean_filter](result\Spacial_image_restore_mean_filter_gray.png)
+![Spacial_image_restore_mean_filter](https://github.com/jianghd1996/Digital-Image-Processing/tree/main/result/Spacial_image_restore_mean_filter_gray.png)
 
-![Spacial_image_restore_mean_filter_color](result\Spacial_image_restore_mean_filter_color.png)
+![Spacial_image_restore_mean_filter_color](https://github.com/jianghd1996/Digital-Image-Processing/tree/main/result/Spacial_image_restore_mean_filter_color.png)
 
 
 
