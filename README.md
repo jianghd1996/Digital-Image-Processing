@@ -6,6 +6,15 @@ While the code is realized in very inefficient way under python, it may run very
 
 
 
+Process :
+
+- [x] OpenCV version
+- [ ] My version
+- [ ] Result
+- [ ] Docs
+
+
+
 ### Histogram equalization
 
 ---

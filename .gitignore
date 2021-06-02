@@ -1,6 +1,9 @@
 # My dataset
 image_dataset/
 code\static\temp_images
+*.jpg
+*.png
+*.tif
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

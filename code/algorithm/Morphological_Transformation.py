@@ -223,6 +223,130 @@ def MyLaplacian(img, mode):
 
     return np.clip(np.array(img, dtype="int")-laplacian, 0, 255), laplacian, norm
 
+def FFT(img):
+    fft = np.fft.fft2(img)
+
+    ifft = np.fft.ifft2(fft)
+    return 20 * np.log(np.abs(np.fft.fftshift(fft))), np.abs(ifft)
+
+def Matching(img):
+    width, height = img.shape[0], img.shape[1]
+    w = width // 5
+    h = height // 5
+
+    p = (np.random.randint(width-w), np.random.randint(height-h))
+    template = img[p[0]:p[0]+w, p[1]:p[1]+h]
+    template_img = img.copy()
+    cv2.rectangle(template_img, p, (p[0]+w, p[1]+h), 255, 2)
+
+    res = cv2.matchTemplate(img, template, cv2.TM_CCOEFF_NORMED)
+
+    single_img = img.copy()
+
+    min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(res)
+
+    top_left = max_loc
+    bottom_right = (top_left[0] + w, top_left[1] + h)
+    cv2.rectangle(single_img, top_left, bottom_right, 255, 2)
+
+    multi_img = img.copy()
+
+    threshold = 0.8
+    loc = np.where(res >= threshold)
+    for pt in zip(*loc[::-1]):
+        bottom_right = (pt[0] + w, pt[1] + h)
+        cv2.rectangle(multi_img, pt, bottom_right, 255, 2)
+
+    return template_img, single_img, multi_img
+
+def IdealHighPassFiltering(f_shift, D0):
+    m = f_shift.shape[0]
+    n = f_shift.shape[1]
+    h1 = np.zeros((m, n))
+    x0 = np.floor(m/2)
+    y0 = np.floor(n/2)
+    for i in range(m):
+        for j in range(n):
+            D = np.sqrt((i - x0)**2 + (j - y0)**2)
+            if D >= D0:
+                h1[i][j] = 1
+    result = np.multiply(f_shift, h1)
+    return result
+
+def GaussLowPassFiltering(f_shift, D0):
+    m = f_shift.shape[0]
+    n = f_shift.shape[1]
+    h1 = np.zeros((m, n))
+    x0 = np.floor(m/2)
+    y0 = np.floor(n/2)
+    for i in range(m):
+        for j in range(n):
+            D = np.sqrt((i - x0)**2 + (j - y0)**2)
+            h1[i][j] = np.exp((-1)*D**2/2/(D0**2))
+    result = np.multiply(f_shift, h1)
+    return result
+
+def GFLP(img, r):
+    f = np.fft.fft2(img)
+    f_shift = np.fft.fftshift(f)
+    IHPF = np.fft.ifftshift(IdealHighPassFiltering(f_shift, r))
+    GLPF = np.fft.ifftshift(GaussLowPassFiltering(f_shift, r))
+    return np.abs(np.fft.ifft2(IHPF)), np.abs(np.fft.ifft2(GLPF))
+
+def DCT(img):
+    if len(img.shape) == 2:
+        img = np.float32(img)
+        dct = cv2.dct(img)
+
+        idct = cv2.idct(dct)
+    else:
+        img = np.float32(img)
+        dct = img.copy()
+        idct = img.copy()
+
+        for i in range(3):
+            dct[:, :, i] = cv2.dct(img[:, :, i])
+            idct[:, :, i] = cv2.idct(dct[:, :, i])
+
+    return dct, idct
+
+def Edge(img):
+    sobel_x = cv2.Sobel(img, cv2.CV_64F, 1, 0, ksize=3)
+    sobel_y = cv2.Sobel(img, cv2.CV_64F, 0, 1, ksize=3)
+
+    dst = cv2.Canny(img, 50, 200, None, 3)
+
+    lines = cv2.HoughLines(dst, 1, np.pi / 180, 150, None, 0, 0)
+
+    hough = dst.copy()
+
+    if lines is not None:
+        for i in range(0, len(lines)):
+            rho = lines[i][0][0]
+            theta = lines[i][0][1]
+            a = math.cos(theta)
+            b = math.sin(theta)
+            x0 = a * rho
+            y0 = b * rho
+            pt1 = (int(x0 + 1000 * (-b)), int(y0 + 1000 * (a)))
+            pt2 = (int(x0 - 1000 * (-b)), int(y0 - 1000 * (a)))
+            cv.line(dst, pt1, pt2, 255, 3, cv.LINE_AA)
+
+    return sobel_x, sobel_y, hough
+
+def morphology(img, mode):
+    kernel = np.ones((5, 5), np.uint8)
+    if mode == "erode":
+        return cv2.erode(img, kernel)
+    elif mode == "dilation":
+        return cv2.dilate(img, kernel)
+    elif mode == "opening":
+        return cv2.morphologyEx(img, cv2.MORPH_OPEN, kernel)
+    elif mode == "closing":
+        return cv2.morphologyEx(img, cv2.MORPH_CLOSE, kernel)
+    else:
+        return cv2.morphologyEx(img, cv2.MORPH_GRADIENT, kernel)
+
 def add_noise(img, mode):
     '''
     Add gaussian noise to image

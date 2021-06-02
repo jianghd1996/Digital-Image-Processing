@@ -123,6 +123,52 @@ def M_T():
         return render_template("MT_2.html", raw_name=raw_name, result_name=result_name,
                                norm_name=norm_img_name, laplace_name=laplace_img_name)
 
+    elif mode in ['FFT']:
+        fft_img, recover_img = Morphological_Transformation.FFT(img)
+        destination = "/".join([target, raw_name])
+        cv2.imwrite(destination, img)
+
+        fft_name = "fft-{}-{}".format(mode, filename)
+        destination = "/".join([target, fft_name])
+        cv2.imwrite(destination, fft_img)
+
+        recover_name = "fft-recover-{}-{}".format(mode, filename)
+        destination = "/".join([target, recover_name])
+        cv2.imwrite(destination, recover_img)
+
+        return render_template("MT_3.html", raw_name=raw_name, fft_name=fft_name, my_fft_name=fft_name, recover_name=recover_name)
+
+    elif mode in ["Template_matching"]:
+        template_img, single_img, multi_img = Morphological_Transformation.Matching(img)
+
+        destination = "/".join([target, raw_name])
+        cv2.imwrite(destination, img)
+
+        template_name = "template-{}-{}".format(mode, filename)
+        destination = "/".join([target, template_name])
+        cv2.imwrite(destination, template_img)
+
+        single_name = "single-{}-{}".format(mode, filename)
+        destination = "/".join([target, single_name])
+        cv2.imwrite(destination, single_img)
+
+        multi_name = "multi-{}-{}".format(mode, filename)
+        destination = "/".join([target, multi_name])
+        cv2.imwrite(destination, multi_img)
+
+        return render_template("MT_4.html", raw_name=raw_name, template_name=template_name, single_name=single_name, multi_name=multi_name)
+
+    elif "GFLP" in mode:
+        r = int(mode[5:])
+        # IHPF is high-pass filter
+        IHPF, GLPF = Morphological_Transformation.GFLP(img, r)
+        destination = "/".join([target, raw_name])
+        cv2.imwrite(destination, img)
+        destination = "/".join([target, result_name])
+        cv2.imwrite(destination, GLPF)
+
+        return render_template("MT_5.html", raw_name=raw_name, result_name=result_name)
+
     elif mode in ['Arithmetic', 'Geometric', 'Adaptive']:
         noise_img, noise_size = Morphological_Transformation.add_noise(img.copy(), "gaussian")
         myimg = Morphological_Transformation.MyRecover(noise_img, mode, noise_size)
@@ -136,8 +182,51 @@ def M_T():
         destination = "/".join([target, noise_img_name])
         cv2.imwrite(destination, noise_img)
 
-        return render_template("MT_3.html", raw_name=raw_name, result_name=result_name,
+        return render_template("MT_6.html", raw_name=raw_name, result_name=result_name,
                                noise_name= noise_img_name)
+
+    elif mode in ['DCT']:
+        dct_img, recover_img = Morphological_Transformation.DCT(img)
+        destination = "/".join([target, raw_name])
+        cv2.imwrite(destination, img)
+
+        dct_name = "dct-{}-{}".format(mode, filename)
+        destination = "/".join([target, dct_name])
+        cv2.imwrite(destination, dct_img)
+
+        recover_name = "dct-recover-{}-{}".format(mode, filename)
+        destination = "/".join([target, recover_name])
+        cv2.imwrite(destination, recover_img)
+
+        return render_template("MT_7.html", raw_name=raw_name, dct_name=dct_name, my_dct_name=dct_name, recover_name=recover_name)
+
+    elif mode in ['erosion', 'dilation', 'opening', 'closing', 'gradient']:
+        result_img = Morphological_Transformation.morphology(img, mode)
+        destination = "/".join([target, raw_name])
+        cv2.imwrite(destination, img)
+        destination = "/".join([target, result_name])
+        cv2.imwrite(destination, result_img)
+
+        return render_template("MT_8.html", raw_name=raw_name, result_name=result_name)
+
+    elif mode in ['Edge']:
+        sobel_x, sobel_y, hough = Morphological_Transformation.Edge(img)
+        destination = "/".join([target, raw_name])
+        cv2.imwrite(destination, img)
+
+        sobel_x_name = "sobel-x-{}-{}".format(mode, filename)
+        destination = "/".join([target, sobel_x_name])
+        cv2.imwrite(destination, sobel_x)
+
+        sobel_y_name = "sobel-y-{}-{}".format(mode, filename)
+        destination = "/".join([target, sobel_y_name])
+        cv2.imwrite(destination, sobel_y)
+
+        hough_name = "hough-{}-{}".format(mode, filename)
+        destination = "/".join([target, hough_name])
+        cv2.imwrite(destination, hough)
+
+        return render_template("MT_9.html", raw_name=raw_name, sobel_x=sobel_x_name, sobel_y=sobel_y_name, hough=hough_name)
 
     return render_template("new_error.html", message="Invalid mode (vertical or horizontal)"), 400
 

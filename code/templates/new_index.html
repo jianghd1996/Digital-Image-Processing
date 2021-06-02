@@ -24,7 +24,7 @@
     <!-- Favicon -->
     <link rel="shortcut icon" href="../static/css_images/favicon.png" />
 
-    <title>数字图像处理作业</title>
+    <title>Digital image processing</title>
 
 </head>
 
@@ -55,9 +55,9 @@
     <section id="hero">
         <div class="container">
             <div class="heading-wrapper">
-                <h1>上传图片</h1>
+                <h1>Upload images</h1>
                 <p></p>
-                <label for="file-picker" class="primary-btn">选择文件
+                <label for="file-picker" class="primary-btn">Select images
                 <form id="upload-form" action="{{ url_for('upload') }}" method="POST" enctype="multipart/form-data">
                     <input id="file-picker" type="file" name="file"  class="hidden" onchange="this.form.submit()">
                 </form>
@@ -73,14 +73,21 @@
     <section id="footer">
         <div class="container">
             <div class="heading-wrapper">
-                <h3>内容</h3>
-                <p>直方图均衡化</p>
-                <p>图像锐化(拉普拉斯变换)</p>
-                <p>空间域滤波复原</p>
+                <h3>Content</h3>
+                <p>Histogram equalization</p>
+                <p>Laplacian transformer</p>
+                <p>Fast fourier transform</p>
+                <p>Correlation matching</p>
+                <p>Gaussian low-pass filter</p>
+                <p>Spacial filter image restoration</p>
+                <p>Discrete cosine transform</p>
+                <p>Morphology transform</p>
+                <p>Edge detection and connection</p>
+                
             </div>
             <div class="row topmargin-lg">
                 <div class="col-md-4">
-                    <small>© 数字图像处理 2021</small>
+                    <small>© Digital image processing </small>
                 </div>
             </div>
         </div>

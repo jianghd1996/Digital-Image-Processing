@@ -24,7 +24,7 @@
     <!-- Favicon -->
     <link rel="shortcut icon" href="../static/css_images/favicon.png" />
     
-    <title>数字图像处理小作业</title>
+    <title>Digital image processing</title>
 
 </head>
 
@@ -75,22 +75,22 @@
 
                 <div class="jumbotron-left">
                     <img src=" {{url_for('send_image', filename=raw_name)}} " style="max-width:100%">
-                    <div style="padding-top:10px;"> 原图 </div>
+                    <div style="padding-top:10px;"> raw </div>
                 </div>
 
                 <div class="jumbotron-right">
                     <img src=" {{url_for('send_image', filename=result_name)}} " style="max-width:100%">
-                    <div style="padding-top:10px;"> 直方图均衡化结果 </div>
+                    <div style="padding-top:10px;"> result </div>
                 </div>
 
                 <div class="jumbotron-left">
                     <img src=" {{url_for('send_image', filename=raw_hist_name)}} " style="max-width:100%">
-                    <div style="padding-top:10px;"> 原图灰度直方图（灰度/R通道/I通道） </div>
+                    <div style="padding-top:10px;"> raw histogram </div>
                 </div>
 
                 <div class="jumbotron-right">
                     <img src=" {{url_for('send_image', filename=result_hist_name)}} " style="max-width:100%">
-                    <div style="padding-top:10px;"> 均衡化灰度直方图（灰度/R通道/I通道）</div>
+                    <div style="padding-top:10px;"> equalized histogram</div>
                 </div>
             </div>
         </div>
@@ -101,8 +101,8 @@
     <section id="pricing">
         <div class="container">
             <div class="heading-wrapper">
-                <h5>直方图均衡化</h5>
-                <p>直方图均衡化，是通过灰度值变换，调整图像的灰度值分布，使得图像的像素尽可能均匀地占有全部可能的灰度值，可用于提高图像的对比度。本实验分别提供在灰度、RGB和HSI空间下的直方图均衡化算法（请根据输入图像和需求选取对应的选项）。</p> 
+                <h5>Histogram equalization</h5>
+                <p></p> 
 
             </div>
         </div>
@@ -112,14 +112,20 @@
     <section id="footer">
         <div class="container">
             <div class="heading-wrapper">
-                <h3>内容</h3>
-                <p>直方图均衡化</p>
-                <p>图像锐化(拉普拉斯变换)</p>
-                <p>空间域滤波复原</p>
+                <h3>Content</h3>
+                <p>Histogram equalization</p>
+                <p>Laplacian transformer</p>
+                <p>Fast fourier transform</p>
+                <p>Correlation matching</p>
+                <p>Gaussian low-pass filter</p>
+                <p>Spacial filter image restoration</p>
+                <p>Discrete cosine transform</p>
+                <p>Morphology transform</p>
+                <p>Edge detection and connection</p>
             </div>
             <div class="row topmargin-lg">
                 <div class="col-md-4">
-                    <small>© 数字图像处理 2021</small>
+                    <small>© Digital image processing</small>
                 </div>
             </div>
         </div>

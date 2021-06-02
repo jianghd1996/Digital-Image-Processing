@@ -75,22 +75,22 @@
 
                 <div class="jumbotron-left">
                     <img src=" {{url_for('send_image', filename=raw_name)}} " style="max-width:100%">
-                    <div style="padding-top:10px;"> 原图 </div>
+                    <div style="padding-top:10px;"> raw </div>
                 </div>
 
                 <div class="jumbotron-right">
                     <img src=" {{url_for('send_image', filename=laplace_name)}} " style="max-width:100%">
-                    <div style="padding-top:10px;"> 拉普拉斯算子 </div>
+                    <div style="padding-top:10px;"> Laplace </div>
                 </div>
 
                 <div class="jumbotron-left">
                     <img src=" {{url_for('send_image', filename=norm_name)}} " style="max-width:100%">
-                    <div style="padding-top:10px;"> 归一化拉普拉斯算子 </div>
+                    <div style="padding-top:10px;"> Normalized laplace </div>
                 </div>
 
                 <div class="jumbotron-right">
                     <img src=" {{url_for('send_image', filename=result_name)}} " style="max-width:100%">
-                    <div style="padding-top:10px;"> 图像锐化结果 </div>
+                    <div style="padding-top:10px;"> Sharpen result </div>
                 </div>
             </div>
         </div>
@@ -101,8 +101,8 @@
     <section id="pricing">
         <div class="container">
             <div class="heading-wrapper">
-                <h5>图像锐化(拉普拉斯变换)</h5>
-                <p>图像锐化是通过滤波器寻找图像中的重要细节并进行增强。二阶微分算子（拉普拉斯算子）可以用于定位图像中的边缘信息，通过对边缘增强能够实现锐化效果。本实验提供中心为-4与-8两种拉普拉斯算子，分别能产生不同的锐化效果。</p>
+                <h5>Laplacian transformer</h5>
+                <p></p> 
             </div>
         </div>
     </section>
@@ -111,14 +111,20 @@
     <section id="footer">
         <div class="container">
             <div class="heading-wrapper">
-                <h3>内容</h3>
-                <p>直方图均衡化</p>
-                <p>图像锐化(拉普拉斯变换)</p>
-                <p>空间域滤波复原</p>
+                <h3>Content</h3>
+                <p>Histogram equalization</p>
+                <p>Laplacian transformer</p>
+                <p>Fast fourier transform</p>
+                <p>Correlation matching</p>
+                <p>Gaussian low-pass filter</p>
+                <p>Spacial filter image restoration</p>
+                <p>Discrete cosine transform</p>
+                <p>Morphology transform</p>
+                <p>Edge detection and connection</p>
             </div>
             <div class="row topmargin-lg">
                 <div class="col-md-4">
-                    <small>© 数字图像处理 2021</small>
+                    <small>© Digital image processing</small>
                 </div>
             </div>
         </div>
